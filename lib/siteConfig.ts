@@ -26,6 +26,7 @@ export interface SiteConfig {
   email: string;
   telephone: string;
   phoneHref: string;
+  whatsappNumber: string;
   address: AddressInfo;
   displayAddress: string;
   geo: GeoCoordinates;
@@ -56,6 +57,7 @@ export const siteConfig: SiteConfig = {
   email: "info@friendsdrivingcentre.com",
   telephone: "+91 98765 43210",
   phoneHref: "tel:+919876543210",
+  whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "7639359098",
   address: {
     streetAddress: "123 GST Road",
     addressLocality: "Chennai",

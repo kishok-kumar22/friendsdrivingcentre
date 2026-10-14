@@ -1,19 +1,52 @@
 "use client";
 
 import { m, useReducedMotion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Users, User, ParkingSquare } from "lucide-react";
 import { programs } from "@/lib/data";
 import {
   cardEntryVariants,
   checklistContainer,
   checklistItem,
-  popSpring,
   stagger,
   viewport,
 } from "@/lib/motion";
 import SectionHeading from "./SectionHeading";
-import Icon from "./Icon";
 import SafeImage from "./SafeImage";
+import StepTag from "./StepTag";
+import { RoadIcon, HighwayIcon, SteeringWheelIcon } from "./StepIcons";
+
+const steps = [
+  {
+    step: 1,
+    title: "Women-to-Women Training",
+    icon: <Users className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2.2} />,
+  },
+  {
+    step: 2,
+    title: "One-to-One Mentor",
+    icon: <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2.2} />,
+  },
+  {
+    step: 3,
+    title: "Street Confidence",
+    icon: <RoadIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2.2} />,
+  },
+  {
+    step: 4,
+    title: "Parking Mastery",
+    icon: <ParkingSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2.2} />,
+  },
+  {
+    step: 5,
+    title: "Highway & Overtaking Skills",
+    icon: <HighwayIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2.2} />,
+  },
+  {
+    step: 6,
+    title: "Independent Driving Stage",
+    icon: <SteeringWheelIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2.2} />,
+  },
+];
 
 export default function TrainingPrograms() {
   const reduced = useReducedMotion();
@@ -33,16 +66,17 @@ export default function TrainingPrograms() {
           subtitle="From basics to independence — we guide you at every step, with focused training and real-world practice."
         />
 
-        {/* Wider Programs Grid: Row 1 = 3 equal cards, Row 2 = 2 wider cards */}
+        {/* Programs Grid: 6 cards in a balanced 3-column grid on desktop */}
         <m.div
           variants={stagger}
           initial={reduced ? false : "hidden"}
           whileInView="visible"
           viewport={viewport}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8 mt-9 sm:mt-11"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-9 sm:mt-11"
         >
           {programs.map((prog, index) => {
-            const isWideCard = index >= 3;
+            const stepItem = steps[index];
+
             return (
               <m.article
                 key={prog.id}
@@ -56,20 +90,10 @@ export default function TrainingPrograms() {
                       }
                 }
                 transition={{ duration: 0.28, ease: "easeOut" }}
-                className={`group bg-white rounded-xl border border-[#E5EEEC] shadow-[0_4px_16px_rgba(11,60,77,0.06)] overflow-hidden flex flex-col ${
-                  isWideCard
-                    ? "lg:col-span-3 md:col-span-1"
-                    : "lg:col-span-2 md:col-span-1"
-                }`}
+                className="group bg-white rounded-xl border border-[#E5EEEC] shadow-[0_4px_16px_rgba(11,60,77,0.06)] overflow-hidden flex flex-col"
               >
                 {/* Image on top: uses uploaded program image containing the photo + program badge */}
-                <div
-                  className={`relative w-full bg-[#E6F5F3] overflow-hidden ${
-                    isWideCard
-                      ? "aspect-[500/302] lg:aspect-[750/257]"
-                      : "aspect-[500/302]"
-                  }`}
-                >
+                <div className="relative w-full bg-[#E6F5F3] overflow-hidden aspect-[500/302]">
                   <SafeImage
                     src={prog.image}
                     alt={prog.imageAlt}
@@ -78,6 +102,16 @@ export default function TrainingPrograms() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   />
+                  {/* Step Tag overlay at bottom-left of the card image */}
+                  {stepItem && (
+                    <div className="absolute bottom-3 left-3 z-10 pointer-events-none">
+                      <StepTag
+                        step={stepItem.step}
+                        title={stepItem.title}
+                        icon={stepItem.icon}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {/* Card Body */}

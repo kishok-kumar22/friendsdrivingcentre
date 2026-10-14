@@ -6,11 +6,12 @@ import { fileURLToPath } from "node:url";
 await mkdir(new URL("../public/images/", import.meta.url), { recursive: true });
 const slots = [
   ["hero", "Your driving journey", 1200, 850],
-  ["program-1", "One-to-One Mentor", 900, 300],
-  ["program-2", "Street Confidence", 900, 300],
-  ["program-3", "Parking Mastery", 900, 300],
-  ["program-4", "Highway Training", 1100, 300],
-  ["program-5", "Independent Driving", 1100, 300],
+  ["program-1", "Female to Female Mentor", 900, 300],
+  ["program-2", "One-to-One Mentor", 900, 300],
+  ["program-3", "Street Confidence", 900, 300],
+  ["program-4", "Parking Mastery", 900, 300],
+  ["program-5", "Highway Training", 1100, 300],
+  ["program-6", "Independent Driving", 1100, 300],
   ["banner", "", 1400, 260],
   ["avatar-1", "PS", 120, 120], ["avatar-2", "AK", 120, 120], ["avatar-3", "MR", 120, 120],
 ];

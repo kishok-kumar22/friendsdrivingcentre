@@ -63,6 +63,19 @@ export const programs: readonly TrainingProgram[] = [
   {
     id: 1,
     icon: "user",
+    title: "Women-to-Women Training",
+    description: "Personalised, comfortable, and patient driving training exclusively with certified female instructors.",
+    features: [
+      "100% certified female instructors",
+      "Comfortable & supportive learning space",
+      "Doorstep training at your own pace",
+    ],
+    image: images.program1,
+    imageAlt: "Certified female driving instructor offering one-to-one coaching to female learner",
+  },
+  {
+    id: 2,
+    icon: "user",
     title: "One-to-One Mentor",
     description: "Personalised training with an individual instructor.",
     features: [
@@ -70,11 +83,11 @@ export const programs: readonly TrainingProgram[] = [
       "Customized learning pace",
       "Instant feedback & guidance",
     ],
-    image: images.program1,
+    image: images.program2,
     imageAlt: "Certified instructor giving one-to-one personalized driving coaching to a learner inside car",
   },
   {
-    id: 2,
+    id: 3,
     icon: "road",
     title: "Street Confidence",
     description: "Driving on streets and narrow roads.",
@@ -83,11 +96,11 @@ export const programs: readonly TrainingProgram[] = [
       "Narrow lanes & tight turns",
       "Build confidence in everyday driving",
     ],
-    image: images.program2,
+    image: images.program3,
     imageAlt: "Driver view navigating bustling city street traffic and narrow lanes in Chennai",
   },
   {
-    id: 3,
+    id: 4,
     icon: "parking",
     title: "Parking Mastery",
     description: "Parallel parking, reverse parking, and slope starts.",
@@ -96,11 +109,11 @@ export const programs: readonly TrainingProgram[] = [
       "Reverse parking techniques",
       "Slope start & hill hold control",
     ],
-    image: images.program3,
+    image: images.program4,
     imageAlt: "White car practicing precision parallel parking and reverse maneuvers around orange traffic cones",
   },
   {
-    id: 4,
+    id: 5,
     icon: "road",
     title: "Highway & Overtaking Skills",
     description: "Safe overtaking and highway awareness.",
@@ -109,11 +122,11 @@ export const programs: readonly TrainingProgram[] = [
       "Safe overtaking practice",
       "Speed control & lane discipline",
     ],
-    image: images.program4,
+    image: images.program5,
     imageAlt: "Open multilane highway under bright sky for high-speed lane discipline and overtaking training",
   },
   {
-    id: 5,
+    id: 6,
     icon: "wheel",
     title: "Independent Driving Stage",
     description: "Driving independently while the trainer monitors progress.",
@@ -122,7 +135,7 @@ export const programs: readonly TrainingProgram[] = [
       "Trainer observes & supports",
       "Final assessment & confidence check",
     ],
-    image: images.program5,
+    image: images.program6,
     imageAlt: "Student driving independently on an open road with trainer monitoring from the passenger seat",
   },
 ];
@@ -190,6 +203,7 @@ export const contact = {
   email: siteConfig.email,
   phone: siteConfig.telephone,
   phoneHref: siteConfig.phoneHref,
+  whatsappNumber: siteConfig.whatsappNumber || siteConfig.telephone.replace(/\D/g, ""),
   address: siteConfig.displayAddress,
 };
 
