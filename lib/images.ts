@@ -23,7 +23,7 @@ export const images: ImageCollection = {
   program5: "/images/program-5.png",
   program6: "/images/program-6.png",
   banner: "/images/hero.jpg",
-  avatar1: "https://i.pravatar.cc/150?img=47",
-  avatar2: "https://i.pravatar.cc/150?img=12",
-  avatar3: "https://i.pravatar.cc/150?img=45",
+  avatar1: "/images/review-images/review-image-1.png",
+  avatar2: "/images/review-images/review-image-2.png",
+  avatar3: "/images/review-images/review-image-3.png",
 };

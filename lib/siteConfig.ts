@@ -55,8 +55,8 @@ export const siteConfig: SiteConfig = {
   tagline: "Learn to Drive Confidently in Your Own Vehicle",
   url: siteUrl,
   email: "info@friendsdrivingcentre.com",
-  telephone: "+91 98765 43210",
-  phoneHref: "tel:+919876543210",
+  telephone: "+91 7639359098",
+  phoneHref: "tel:+917639359098",
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "7639359098",
   address: {
     streetAddress: "123 GST Road",
