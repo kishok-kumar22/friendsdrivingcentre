@@ -51,7 +51,7 @@ export default function SiteProvider({
   children: React.ReactNode;
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState<EnquiryFormData>(initialFormState);
   const [whatsappUrl, setWhatsappUrl] = useState<string>("");
