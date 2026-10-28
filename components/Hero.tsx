@@ -21,7 +21,7 @@ export default function Hero() {
 
   useEffect(() => {
     openEnquiry();
-    }, [openEnquiry]);
+    }, []);
 
   return (
     <section
