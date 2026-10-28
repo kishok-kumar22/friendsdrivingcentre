@@ -9,18 +9,17 @@ import { WhatsApp } from "./SocialIcons";
 interface EnquiryFormData {
   name: string;
   phone: string;
-  program: string;
-  timings: string;
+  location: string;
   message: string;
 }
 
 const initialFormState: EnquiryFormData = {
   name: "",
   phone: "",
-  program: programs[0]?.title || "One-to-One Mentor",
-  timings: "Flexible",
+  location: "",
   message: "",
 };
+
 
 const EnquiryContext = createContext<(programOrEvent?: string | React.MouseEvent) => void>(() => {});
 
@@ -78,12 +77,9 @@ export default function SiteProvider({
     };
   }, [isOpen]);
 
-  const handleOpen = (programOrEvent?: string | React.MouseEvent) => {
-    setSubmitted(false);
-    if (typeof programOrEvent === "string" && programOrEvent) {
-      setFormData((prev) => ({ ...prev, program: programOrEvent }));
-    }
-    setIsOpen(true);
+   const handleOpen = () => {
+      setSubmitted(false);
+      setIsOpen(true);
   };
 
   const handleClose = () => {
@@ -99,46 +95,47 @@ export default function SiteProvider({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    // Scrape / extract field details from form state
+  
     const trimmedName = formData.name.trim();
     const trimmedPhone = formData.phone.trim();
-    const selectedProgram = formData.program.trim();
-    const selectedTimings = formData.timings.trim();
+    const trimmedLocation = formData.location.trim();
     const trimmedMessage = formData.message.trim();
-
-    if (!trimmedName || !trimmedPhone) {
+  
+    if (!trimmedName || !trimmedPhone || !trimmedLocation) {
       return;
     }
-
-    // Format clean and structured WhatsApp message
+  
     const messageLines = [
-      `*New Training Enquiry - Friends Driving Centre*`,
-      ``,
+      "*New Training Enquiry - Friends Driving Centre*",
+      "",
       `👤 *Name:* ${trimmedName}`,
       `📞 *Phone:* ${trimmedPhone}`,
-      `🚗 *Training Program:* ${selectedProgram}`,
-      `⏰ *Preferred Timings:* ${selectedTimings}`,
+      `📍 *Location:* ${trimmedLocation}`,
     ];
-
+  
     if (trimmedMessage) {
       messageLines.push(`💬 *Message:* ${trimmedMessage}`);
     }
-
+  
     const messageText = messageLines.join("\n");
     const rawTarget = (contact.whatsappNumber || "919876543210").replace(/\D/g, "");
-    const targetPhone = rawTarget.length === 10 ? `91${rawTarget}` : rawTarget;
-    const generatedUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(messageText)}`;
-
+    const targetPhone =
+      rawTarget.length === 10 ? `91${rawTarget}` : rawTarget;
+  
+    const generatedUrl =
+      `https://wa.me/${targetPhone}?text=${encodeURIComponent(messageText)}`;
+  
     setWhatsappUrl(generatedUrl);
     setSubmitted(true);
-
-    // Complete WhatsApp Redirection:
-    // Attempt window.open first so current site session is preserved;
-    // Fall back to window.location if popup is blocked by the browser.
+  
     try {
-      const waWindow = window.open(generatedUrl, "_blank", "noopener,noreferrer");
-      if (!waWindow || waWindow.closed || typeof waWindow.closed === "undefined") {
+      const waWindow = window.open(
+        generatedUrl,
+        "_blank",
+        "noopener,noreferrer"
+      );
+  
+      if (!waWindow || waWindow.closed) {
         window.location.href = generatedUrl;
       }
     } catch {
@@ -198,27 +195,29 @@ export default function SiteProvider({
                   {/* Summary card showing scraped details */}
                   <div className="w-full mt-4 p-4 rounded-xl bg-[#F8FAF9] border border-[#E5EEEC] text-left text-xs sm:text-[13px] space-y-1.5 text-[#374151]">
                     <div className="text-[11px] font-bold tracking-wider uppercase text-[#0B8F5A] mb-2">
-                      Scraped Enquiry Summary
+                      Enquiry Summary
                     </div>
+                  
                     <div className="flex justify-between py-0.5 border-b border-gray-100">
                       <span className="font-semibold text-gray-500">Name:</span>
                       <span className="font-medium text-[#0B2F2A]">{formData.name}</span>
                     </div>
+                  
                     <div className="flex justify-between py-0.5 border-b border-gray-100">
                       <span className="font-semibold text-gray-500">Phone:</span>
                       <span className="font-medium text-[#0B2F2A]">{formData.phone}</span>
                     </div>
+                  
                     <div className="flex justify-between py-0.5 border-b border-gray-100">
-                      <span className="font-semibold text-gray-500">Program:</span>
-                      <span className="font-medium text-[#0B2F2A]">{formData.program}</span>
+                      <span className="font-semibold text-gray-500">Location:</span>
+                      <span className="font-medium text-[#0B2F2A]">{formData.location}</span>
                     </div>
-                    <div className="flex justify-between py-0.5 border-b border-gray-100">
-                      <span className="font-semibold text-gray-500">Timings:</span>
-                      <span className="font-medium text-[#0B2F2A]">{formData.timings}</span>
-                    </div>
+                  
                     {formData.message && (
                       <div className="pt-1">
-                        <span className="font-semibold text-gray-500 block mb-0.5">Message:</span>
+                        <span className="font-semibold text-gray-500 block mb-0.5">
+                          Message:
+                        </span>
                         <p className="italic text-gray-700 bg-white p-2 rounded border border-gray-100">
                           {formData.message}
                         </p>
@@ -257,7 +256,6 @@ export default function SiteProvider({
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
                       <label htmlFor="enquiry-name" className="block text-xs font-semibold text-[#0B2F2A] mb-1">
                         Your Name <span className="text-red-500">*</span>
@@ -288,51 +286,31 @@ export default function SiteProvider({
                         className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-[#0B8F5A] focus:ring-1 focus:ring-[#0B8F5A]"
                       />
                     </div>
-                  </div>
 
                   <div>
-                    <label htmlFor="enquiry-program" className="block text-xs font-semibold text-[#0B2F2A] mb-1">
-                      Training Program
-                    </label>
-                    <select
-                      id="enquiry-program"
-                      name="program"
-                      value={formData.program}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-[#0B8F5A] focus:ring-1 focus:ring-[#0B8F5A] bg-white"
+                    <label
+                      htmlFor="enquiry-location"
+                      className="block text-xs font-semibold text-[#0B2F2A] mb-1"
                     >
-                      {programs.map((p) => (
-                        <option key={p.id} value={p.title}>
-                          {p.title}
-                        </option>
-                      ))}
-                      <option value="Custom Consultation">Help me choose</option>
-                    </select>
+                      Location <span className="text-red-500">*</span>
+                    </label>
+                  
+                    <input
+                      id="enquiry-location"
+                      name="location"
+                      type="text"
+                      required
+                      value={formData.location}
+                      onChange={handleChange}
+                      placeholder="Enter your area or location"
+                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-[#0B8F5A] focus:ring-1 focus:ring-[#0B8F5A]"
+                    />
                   </div>
+                 
 
-                  <div>
-                    <label htmlFor="enquiry-timings" className="block text-xs font-semibold text-[#0B2F2A] mb-1">
-                      Preferred Timings
-                    </label>
-                    <select
-                      id="enquiry-timings"
-                      name="timings"
-                      value={formData.timings}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:border-[#0B8F5A] focus:ring-1 focus:ring-[#0B8F5A] bg-white"
-                    >
-                      <option value="Flexible">Flexible</option>
-                      <option value="Early Morning (6 AM - 9 AM)">
-                        Early Morning (6 AM - 9 AM)
-                      </option>
-                      <option value="Daytime (10 AM - 4 PM)">
-                        Daytime (10 AM - 4 PM)
-                      </option>
-                      <option value="Late Evening (5 PM - 8 PM)">
-                        Late Evening (5 PM - 8 PM)
-                      </option>
-                    </select>
-                  </div>
+                  
+
+                  
 
                   <div>
                     <label htmlFor="enquiry-message" className="block text-xs font-semibold text-[#0B2F2A] mb-1">
