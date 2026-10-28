@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { m, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowRight, CarFront } from "lucide-react";
 import { heroFeatures } from "@/lib/data";
@@ -18,6 +18,10 @@ export default function Hero() {
   // Gentle parallax on scroll for hero image on desktop (max 36px)
   const { scrollY } = useScroll();
   const imageParallaxY = useTransform(scrollY, [0, 500], [0, 36]);
+
+  useEffect(() => {
+    openEnquiry();
+    }, [openEnquiry]);
 
   return (
     <section
