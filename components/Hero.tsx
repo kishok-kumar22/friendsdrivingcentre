@@ -19,10 +19,6 @@ export default function Hero() {
   const { scrollY } = useScroll();
   const imageParallaxY = useTransform(scrollY, [0, 500], [0, 36]);
 
-  useEffect(() => {
-    openEnquiry();
-    }, []);
-
   return (
     <section
       ref={containerRef}
