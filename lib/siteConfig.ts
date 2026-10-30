@@ -26,6 +26,8 @@ export interface SiteConfig {
   email: string;
   telephone: string;
   phoneHref: string;
+  secondaryPhone: string;
+  secondaryPhoneHref: string;
   whatsappNumber: string;
   address: AddressInfo;
   displayAddress: string;
@@ -54,9 +56,11 @@ export const siteConfig: SiteConfig = {
   shortName: "Friends Driving",
   tagline: "Learn to Drive Confidently in Your Own Vehicle",
   url: siteUrl,
-  email: "info@friendsdrivingcentre.com",
+  email: "fastdriveeetraining@gmail.com",
   telephone: "+91 7639359098",
   phoneHref: "tel:+917639359098",
+  secondaryPhone: "+91 6369998935",
+  secondaryPhoneHref: "tel:+916369998935",
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "7639359098",
   address: {
     streetAddress: "123 GST Road",

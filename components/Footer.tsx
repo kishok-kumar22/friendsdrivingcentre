@@ -12,7 +12,7 @@ const socialIconMap = {
 export default function Footer() {
   return (
     <footer id="contact" className="bg-[#0B3C4D] text-white pt-9 sm:pt-11 pb-6 scroll-mt-20">
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-6 w-full">
         {/* Main Footer Row: Stacks into 1 column on mobile */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 pb-8">
           {/* Logo (White Variant) */}
@@ -32,31 +32,39 @@ export default function Footer() {
                 className="text-white/80 group-hover:text-[#E6F5F3] flex-shrink-0"
                 aria-hidden="true"
               />
-              <div className="flex flex-col text-[12px] sm:text-[13px] leading-snug">
+              <div className="flex flex-col text-[10px] sm:text-[13px] leading-snug">
                 <span className="font-semibold text-white/70">Email</span>
-                <span className="text-[13px] sm:text-[14px] mt-0.5 text-white">
+                <span className="text-[13px] sm:text-[13px] mt-0.5 text-white break-all">
                   {siteConfig.email}
                 </span>
               </div>
             </a>
 
             {/* Phone (Label 13px, Value 14px) */}
-            <a
-              href={siteConfig.phoneHref}
-              className="flex items-center gap-3.5 text-white/90 hover:text-white transition-colors group"
-            >
+            <div className="flex items-center gap-3.5 text-white/90">
               <Phone
                 size={20}
-                className="text-white/80 group-hover:text-[#E6F5F3] flex-shrink-0"
+                className="text-white/80 flex-shrink-0"
                 aria-hidden="true"
               />
               <div className="flex flex-col text-[12px] sm:text-[13px] leading-snug">
                 <span className="font-semibold text-white/70">Phone</span>
-                <span className="text-[13px] sm:text-[14px] mt-0.5 text-white">
-                  {siteConfig.telephone}
-                </span>
+                <div className="flex flex-col text-[13px] sm:text-[14px] mt-0.5 gap-0.5">
+                  <a
+                    href={siteConfig.phoneHref}
+                    className="text-white hover:text-[#E6F5F3] hover:underline transition-colors"
+                  >
+                    {siteConfig.telephone}
+                  </a>
+                  <a
+                    href={siteConfig.secondaryPhoneHref}
+                    className="text-white hover:text-[#E6F5F3] hover:underline transition-colors"
+                  >
+                    {siteConfig.secondaryPhone}
+                  </a>
+                </div>
               </div>
-            </a>
+            </div>
 
             {/* Location (Label 13px, Value 14px) */}
             <div className="flex items-center gap-3.5 text-white/90">

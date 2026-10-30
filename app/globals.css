@@ -65,6 +65,38 @@
   display: none;
 }
 
+/* Custom Sleek WebKit & Standard Scrollbar for Modal Popup */
+.popup-scrollbar {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(11, 143, 90, 0.4) transparent;
+}
+
+.popup-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.popup-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 8px 0;
+  border-radius: 9999px;
+}
+
+.popup-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(11, 143, 90, 0.35);
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+.popup-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(11, 143, 90, 0.7);
+}
+
+.popup-scrollbar::-webkit-scrollbar-thumb:active {
+  background-color: #0B8F5A;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

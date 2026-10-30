@@ -24,7 +24,7 @@ export function generateStructuredData() {
     url: siteConfig.url,
     logo: `${siteConfig.url}/icon`,
     image: [images.hero],
-    telephone: siteConfig.telephone,
+    telephone: [siteConfig.telephone, siteConfig.secondaryPhone],
     email: siteConfig.email,
     priceRange: siteConfig.priceRange,
     currenciesAccepted: siteConfig.currenciesAccepted,

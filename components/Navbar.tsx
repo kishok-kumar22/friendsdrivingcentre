@@ -87,8 +87,9 @@ export default function Navbar() {
           initial={reduceMotion ? false : { opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
+          className="flex items-center"
         >
-          <Logo />
+          <Logo scrolled={scrolled} />
         </m.div>
 
         {/* Center: Desktop Nav Links (Font upgraded to 15-16px with layoutId underline) */}

@@ -201,8 +201,10 @@ export const testimonials: readonly TestimonialItem[] = [
 
 export const contact = {
   email: siteConfig.email,
-  phone: siteConfig.telephone,
+  phone: `${siteConfig.telephone} / ${siteConfig.secondaryPhone}`,
   phoneHref: siteConfig.phoneHref,
+  secondaryPhone: siteConfig.secondaryPhone,
+  secondaryPhoneHref: siteConfig.secondaryPhoneHref,
   whatsappNumber: siteConfig.whatsappNumber || siteConfig.telephone.replace(/\D/g, ""),
   address: siteConfig.displayAddress,
 };
